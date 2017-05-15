@@ -1,0 +1,2 @@
+module FontendHelper
+end

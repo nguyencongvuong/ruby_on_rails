@@ -1,15 +1,16 @@
 class AdminController < ApplicationController
 		
 		layout "backend/_master"
-		  def index
+		
+	  		def index
 
-		  end
-		  def edit
-		  end
-		  def show
+			end
+			def edit
+			end
+			def news
 
-		  end
-	
+			end
+		
   #...
 	
 end
