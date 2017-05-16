@@ -8,7 +8,7 @@ class AdminController < ApplicationController
 			def edit
 			end
 			def news
-
+				@news=New.all
 			end
 		
   #...
