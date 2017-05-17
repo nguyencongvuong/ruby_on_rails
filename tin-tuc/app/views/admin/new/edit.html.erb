@@ -1,0 +1,9 @@
+<%=render "layouts/backend/master"%>
+<%=yield :content%>
+<%=form_for @news,url="/" |f| do %>
+	<div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: "ckeditor" %>
+	</div>
+<%end%>
+<%=yield%>

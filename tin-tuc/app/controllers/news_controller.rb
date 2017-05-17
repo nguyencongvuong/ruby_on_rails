@@ -1,6 +1,5 @@
-class AdminController < ApplicationController
-		
-		layout "backend/_master"
+class NewsController < ApplicationController
+	layout "backend/_master"
 		
 	  		def index
 
@@ -11,7 +10,4 @@ class AdminController < ApplicationController
 			def news
 				@news=New.all
 			end
-		
-  #...
-	
 end
