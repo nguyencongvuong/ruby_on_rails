@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   		get "/news",to: "new#news",as: 'news'
   		get "/news/them-moi",to: "new#add",as: "themmoi"
       post "/news/create",to: "new#create"
+    scope "category" do
+      get "/",to: "category#index",as: "category"
+      get "/create",to: "category#create",as: "category_create"
+      post "/save",to: "category#save",as: "category_save"
+    end
   end
   scope '/' do
   	root "fontend#index"
