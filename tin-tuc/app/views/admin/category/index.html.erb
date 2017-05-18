@@ -30,7 +30,7 @@
 			<th>Slug</th>
 			<th>Parent</th>
 			<th>Số bài viết</th>
-			<th>Thao Tác</th>
+			<th colspan="2">Thao Tác</th>
 		</tr>
 		<% if Category.all.size==0 %>
 		<td colspan="5">Không Tồn Tại</td>
@@ -41,8 +41,8 @@
 			<td><%=c.slug %></td>
 			<td><%=c.parent %></td>
 			<td><%=New.where(category_id:c.id).size %></td>
-			<td ><%=  link_to "delete",admin_category_delete_path(c.id),method: "delete",data: {confirm: "Are you sure?"}  %>
-			<%=link_to "update",method:"put"%></td>
+			<td ><%=  link_to "delete",admin_category_delete_path(c.id),method: "delete",data: {confirm: "Are you sure?"}  %></td>
+			<td><%=link_to "update",admin_category_edit_path(c.id),method:"get"%></td>
 		</tr>
 		<%end%>
 	</table>

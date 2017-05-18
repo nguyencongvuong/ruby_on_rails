@@ -1,31 +1,23 @@
 <%content_for :content do %>
+	<ul>
 	
+	</ul>
 	<div class="col-lg-6">
 	<%@arr=["tin tuc",1],["the thao",2] %>
 
-	<%=form_for :category, url: {action:"save"} do |f| %>
+	<%=form_for :category, url: {action:"update"}method: "put" do |f| %>
 		<%=f.label :name %>
 		<%=f.text_field :name,class: "form-control" %>
+		<%=f.label :slug %>
+		<%=f.text_field :slug,class: "form-control" %>
 		<%=f.label :description %>
 		<%=f.text_field :description,class: "form-control" %>
 		<%=f.submit "Create",class: "btn  btn-default" %>
-
-		
-		
-	<%= f.select(:parent, options_for_select([["--Parent--",0]])) %>
+	<%= f.select(:parent, options_for_select([["Parent",0]]),class:"form-control") %>
 	<%end%>
 	</div>
 
-<div class="col-lg-6">
+	<%end%>
 	
-	<%Category.all.each do |c,key| %>
-		<% if c.parent == 0   %>
-		<%=c.name %>
-		<%end%>
-	<%end%>
-	<% def dequy 
-
-		end %>
-</div>
-
-	<%end%>
+	
+	

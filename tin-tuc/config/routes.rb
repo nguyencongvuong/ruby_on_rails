@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       get "/",to: "category#index",as: "category"
       post "/save",to: "category#save",as: "category_save"
       delete "/delete/:id",to: "category#delete",as: "category_delete"
+      get "/edit/:id",to:"category#edit",as: "category_edit"
+      put "/update/:id",to:"category#update",as:"category_update"
     end
   end
   scope '/' do

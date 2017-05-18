@@ -7,10 +7,10 @@ class Admin::NewController < ApplicationController
 			def create
 				@news=New.new
 				@news.title=params[:news][:title]
-				@news.description=params[:news][:description]
-				@news.author_id=params[:news][:author_id]
-				@news.content=params[:news][:conetent]
 				
+				@news.description=params[:news][:description]
+				@news.content=params[:news][:content]
+				@news.category_id=params[:news][:category_id]
 				if @news.save
 				else
 					render "admin/new/add"
