@@ -1,9 +1,7 @@
 class Admin::CategoryController < ApplicationController
 	layout "backend/_master"
 	helper :application
-
 	def index
-
 	end
 	def create
 		@category=Category.new
@@ -18,5 +16,15 @@ class Admin::CategoryController < ApplicationController
 		@category.parent=params[:category][:parent]
 		@category.save
 		# render html: convert("string")
-	end 
+	end
+	def delete
+		@category=Category.find(params[:id]);
+		if @category.destroy
+			redirect_to admin_category_path()
+		end
+	end
+	def update
+		@category=Category.new
+		render "category/index" 
+	end
 end
