@@ -8,7 +8,6 @@ Rails.application.routes.draw do
       post "/news/create",to: "new#create"
     scope "category" do
       get "/",to: "category#index",as: "category"
-      get "/create",to: "category#create",as: "category_create"
       post "/save",to: "category#save",as: "category_save"
     end
   end

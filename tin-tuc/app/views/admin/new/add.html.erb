@@ -1,13 +1,13 @@
 <%content_for :content do %>
 <h1>Thêm Bài Viết Mới</h1>
 
-<%=form_for @news,url: {action:"create"} do |f| %>
+<%=form_for :news,url: {action:"create"} do |f| %>
 	<%=f.label :title %>
  	<%= f.text_field :title,class: "form-control" %>
  	<%=f.label :description %>
  	<%= f.text_field :description,class: "form-control" %>
  	<%=f.label :author_id %>
- 	<%= f.collection_select(:author_id, Author.all, :id, :name) %>
+ 	<%= f.collection_select(:author_id, Author.find_each, :id, :name) %>
 	<div class="field">
     <%= f.label :content %><br>
     <%= f.text_area :content, class: "ckeditor" %>
@@ -15,4 +15,7 @@
   <%= f.submit "Create" %>
 <% end%>
 
+<%end%>
+<% New.find_each(start: 100) do |new| %>
+<%=new.title%>
 <%end%>

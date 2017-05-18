@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170517143439) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.string "slug"
     t.string "description"
     t.integer "parent"
     t.datetime "created_at", null: false

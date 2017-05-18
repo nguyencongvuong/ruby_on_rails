@@ -1,3 +1,55 @@
 <%content_for :content do %>
-	<%=link_to "Thêm Mới",admin_category_create_path() %>
-<%end%>
+	<ul>
+	
+	</ul>
+	<div class="col-lg-6">
+	<%@arr=["tin tuc",1],["the thao",2] %>
+
+	<%=form_for :category, url: {action:"save"} do |f| %>
+		<%=f.label :name %>
+		<%=f.text_field :name,class: "form-control" %>
+		<%=f.label :slug %>
+		<%=f.text_field :slug,class: "form-control" %>
+		<%=f.label :description %>
+		<%=f.text_field :description,class: "form-control" %>
+		<%=f.submit "Create",class: "btn  btn-default" %>
+	<%= f.select(:parent, options_for_select([["Parent",0]])) %>
+	<%end%>
+	</div>
+
+<div class="col-lg-6">
+	
+	<%Category.all.each do |c,key| %>
+		<% if c.parent == 0   %>
+		
+		<%end%>
+	<%end%>
+	
+	<table  width="100%" class="table table-bordered">
+		<tr>
+			<th>Tên</th>
+			<th>Slug</th>
+			<th>Parent</th>
+			<th>Số lượng bài viết</th>
+		</tr>
+		<% if Category.all.size==0 %>
+		<td colspan="4">Không Tồn Tại</td>
+		<%end%>
+		<%Category.all.each do |c,key| %>
+		<tr>
+		
+			<td><%=c.name %></td>
+			<td><%=c.slug %></td>
+			<td><%=c.parent %></td>
+			<td><%=New.where(category_id:c.id).size %></td>
+		</tr>
+		<%end%>
+	</table>
+</div>
+
+	<%end%>
+
+	
+	
+	
+	

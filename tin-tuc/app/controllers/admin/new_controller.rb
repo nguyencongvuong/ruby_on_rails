@@ -5,7 +5,17 @@ class Admin::NewController < ApplicationController
 			end
 
 			def create
+				@news=New.new
+				@news.title=params[:news][:title]
+				@news.description=params[:news][:description]
+				@news.author_id=params[:news][:author_id]
+				@news.content=params[:news][:conetent]
 				
+				if @news.save
+				else
+					render "admin/new/add"
+				end
+
 			end
 
 			def edit
@@ -16,5 +26,6 @@ class Admin::NewController < ApplicationController
 			end
 			def add
 				@news=New.new
+				
 			end
 end
