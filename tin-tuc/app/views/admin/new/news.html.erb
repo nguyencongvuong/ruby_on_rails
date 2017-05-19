@@ -32,7 +32,7 @@
     <%end%>
  <%=button_to "Thêm Mới",admin_themmoi_path(),{class:"btn btn-primary btn-md",method:"get"}%>
  <div class="col-lg-12">
-                        <h2>Danh Sách Bài Viết</h2>
+                        <div class="alert alert-success" style="margin-top: 30px">Danh Sách Bài Viết <span class="badge"><%=New.all.size%></span></div>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
@@ -40,14 +40,14 @@
                                         <th>Title</th>
                                         <th>Slug</th>
                                         <th>Description</th>
-                                        <th>Author</th>
+                                        <th>Category</th>
                                         <th>Created_at</th>
                                         <th>Updated_at</th>
                                         <th colspan="2">Thao Tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <%@phantrang=paginate(1,admin_news_path())%>    
+                                <%@phantrang=paginate(10,admin_news_path())%>    
                                 <%@phantrang[:query].each do |new| %>
 									 <tr>
                                         <td><%=new.title%></td>
