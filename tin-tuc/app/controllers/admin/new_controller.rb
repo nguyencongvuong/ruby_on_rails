@@ -32,7 +32,7 @@ class Admin::NewController < ApplicationController
 				@news=New.find(params[:id])
 				@news.destroy
 				if @news.destroy
-					redirect_to :action=>"news", :alert=>"Bạn vừa xóa thành công một bài viết"
+					redirect_to :action=>"news"
 				end
 			end
 end
