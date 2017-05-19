@@ -1,6 +1,7 @@
  <%content_for :content do %>
- <%=link_to "Thêm Mới",admin_themmoi_path() %>
+ <%=button_to "Thêm Mới",admin_themmoi_path(),{class:"btn btn-primary btn-md",method:"get"}%>
  <div class="col-lg-12">
+   
                         <h2>Danh Sách Bài Viết</h2>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
@@ -12,6 +13,7 @@
                                         <th>Author</th>
                                         <th>Created_at</th>
                                         <th>Updated_at</th>
+                                        <th>Thao Tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -23,6 +25,7 @@
                                         <td><%=new.author_id%></td>
                                         <td><%=new.created_at%></td>
                                         <td><%=new.updated_at%></td>
+                                        <td><%=link_to "delete",admin_delete_path(new),method:"delete",data: {confirm:"Bạn có chắc chắn muốn xóa"} %></td>
                                     </tr>
                                 <%end%>
                                    

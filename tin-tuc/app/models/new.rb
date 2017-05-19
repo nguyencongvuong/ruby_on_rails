@@ -6,10 +6,7 @@ class New < ApplicationRecord
 	before_save :convert
 	private
 	def convert
-			
-				self.slug=convert_string(title)
-			
-		
+		self.slug=convert_string(title)
 	end
 		def convert_string(string)
 				# space=[" "]
@@ -19,15 +16,18 @@ class New < ApplicationRecord
 				@convert=string.mb_chars.downcase
 				@convert=@convert.gsub(/[áằàảạãăắằặẵấầẩậẫâ]/,"a")
 				@convert=@convert.gsub(/[êếểệễềéẻèẽẹé]/,"e")
-				@convert=@convert.gsub(/["ô","ổ","ồ","ố","ộ","ó","ò","ỏ","õ","ọ","ơ","ỡ","ở","ợ","ờ","ớ"]/,"o")
-				@convert=@convert.gsub(/["ư",'ử','ứ','ữ','ự','ừ','ú','ủ','ù','ụ','ũ']/,"u")
-				@convert=@convert.gsub(/["í",'ỉ','ì','ị','ĩ']/,"i")
-				@convert=@convert.gsub(/["ý",'ỷ','ỳ','ỵ','ỹ']/,"y")
-				@convert=@convert.gsub(/["đ"]/,"d")
-				@convert=@convert.gsub(/["{",'}',"!",'“','”']/,"") 
-				
-				@convert=@convert.gsub!(/["%","@","&",'"',"'",".","  "]/," ")
-				@convert=@convert.gsub!(/["---","--",","," – ","–","|","_","+"]/,"-")
+				@convert=@convert.gsub(/[ôổồốộóòỏõọơỡởợờớ]/,"o")
+				@convert=@convert.gsub(/[ưửứữựừúủùụũ]/,"u")
+				@convert=@convert.gsub(/[íỉìịĩ]/,"i")
+				@convert=@convert.gsub(/[ýỷỳỵỹ]/,"y")
+				@convert=@convert.gsub(/[đ]/,"d")
+				@convert=@convert.gsub(/[{}!“”.…]/,'')
+				@convert=@convert.gsub( /\[/,'')
+				@convert=@convert.gsub( /\]/,'')
+				@convert=@convert.gsub(/[%@&",'"',"'"]/," ")
+				@convert=@convert.gsub(/  /," ")
+				@convert=@convert.gsub(/["---","--",'--',","," – ","\/","\\","–","|","_","+"]/,"-")
+				# @convert=@convert.gsub(/" "/,"-")
 				return @convert
 	end
 end
