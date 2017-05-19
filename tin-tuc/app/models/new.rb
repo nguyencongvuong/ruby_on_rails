@@ -21,12 +21,12 @@ class New < ApplicationRecord
 				@convert=@convert.gsub(/[íỉìịĩ]/,"i")
 				@convert=@convert.gsub(/[ýỷỳỵỹ]/,"y")
 				@convert=@convert.gsub(/[đ]/,"d")
-				@convert=@convert.gsub(/[{}!“”.…]/,'')
+				@convert=@convert.gsub(/[{}!“”.…–]/,'')
 				@convert=@convert.gsub( /\[/,'')
 				@convert=@convert.gsub( /\]/,'')
-				@convert=@convert.gsub(/[%@&",'"',"'"]/," ")
+				@convert=@convert.gsub(/[%@&",'"',"'","  ","   "]/," ")
 				@convert=@convert.gsub(/  /," ")
-				@convert=@convert.gsub(/["---","--",'--',","," – ","\/","\\","–","|","_","+"]/,"-")
+				@convert=@convert.gsub(/["---","--",",","\/","\\","|","_","+",' ']/,"-")
 				# @convert=@convert.gsub(/" "/,"-")
 				return @convert
 	end

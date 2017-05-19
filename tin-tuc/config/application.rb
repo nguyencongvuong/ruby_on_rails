@@ -14,6 +14,7 @@ module ProjectDemo
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+  # config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
   config.assets.paths << Rails.root.join("app", "assets", "backend")
 	config.assets.paths << Rails.root.join("app", "assets", "backend", "css")
   config.assets.paths << Rails.root.join("app", "assets", "backend", "js")
@@ -22,5 +23,6 @@ module ProjectDemo
   config.assets.paths << Rails.root.join("app", "assets", "backend","font-awesome","css")
   config.assets.paths << Rails.root.join("app", "assets", "backend","font-awesome","fonts")
 	config.assets.paths << Rails.root.join("app", "assets","fonts")
+
   end
 end
