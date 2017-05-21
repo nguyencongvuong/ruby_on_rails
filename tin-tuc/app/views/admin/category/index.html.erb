@@ -1,10 +1,27 @@
 <%content_for :content do %>
+	<%def dequy(parent=0,char="")
+            @category=Category.all
+            @children=[]  
+            @category.each do |cat|
+                if cat.parent==parent
+                    @children.push(cat)	
+                end	
+            end %>
+            <% char+="- "%>
+            <% char="" if parent==0 %>
+            <% @children.each do |value,key|
+                %>     	
+              <%=raw "<option value='#{value.id}'>" %>
+                <%=char+value.name%>
+              <%=raw '</option>' %>
+                <% dequy(value.id,char=char) %>
+            <%end %>
+	<%end%> 
 	<ul>
 	
 	</ul>
 	<div class="col-lg-6">
 	<%@arr=["tin tuc",1],["the thao",2] %>
-
 	<%=form_for :category, url: {action:"save"} do |f| %>
 		<%=f.label :name %>
 		<%=f.text_field :name,class: "form-control" %>
@@ -12,49 +29,21 @@
 		<%=f.text_field :slug,class: "form-control" %>
 		<%=f.label :description %>
 		<%=f.text_field :description,class: "form-control" %>
+		<%=raw "<select name='category[parent]' id='parent' class='form-control'>"%>  
+		<option value='0'>Select Parent</option>                
+		<%= dequy%>
+		<%=raw "</select>"%>  
 		<%=f.submit "Create",class: "btn  btn-default" %>
 		<% 
 		Category.all.each do |cat|%>
 		<% 
-		@array=[cat.name,cat.id]%>
-		
-		<%end%>
-		<%  def dequy(parent=0,char="")
-            @category=Category.all
-            @children=[] 
-            @i=0
-            @category.each do |cat|
-                if cat.parent==parent
-                    @children.push(cat)
-                end
-            end %>
-            <% @children.each do |value,key|
-                %>
-                <% if value.parent==0 %>
-                <% @char=""%>
-                <%else%>
-                 <% @char+="-"%>
-                <%end%>
-              <%=raw "<option value='#{value.id}'>" %>
-                <%=@char+value.name%>
-              <%=raw '</option>' %>
-                <%
-                dequy(value.id,@char) 
-            end %>
-            <%end%> 
-<%=raw "<select name='category[parent]' id='parent'>"%>  
-<option value='0'>Select Parent</option>                
-<%= dequy%>
-<%=raw "</select>"%>  
+		@array=[cat.name,cat.id]%>	
+		<%end%>	
 	<%end%>
-
 	</div>
-
 <div class="col-lg-6">
-	
 	<%Category.all.each do |c,key| %>
-		<% if c.parent == 0   %>
-		
+		<% if c.parent == 0   %>	
 		<%end%>
 	<%end%>
 	<table  width="100%" class="table table-bordered">
@@ -70,7 +59,6 @@
 		<%end%>
 		<%@phantrang=paginate(5,admin_category_path(),Category)%>    
         <%@phantrang[:query].each do |c,key| %>
-		
 		<tr>
 			<td><%=c.name %></td>
 			<td><%=c.slug %></td>

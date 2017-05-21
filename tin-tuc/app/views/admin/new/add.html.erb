@@ -1,23 +1,5 @@
 <%content_for :content do %>
-<div class="col-lg-8">
-	
-
-<h1>Thêm Bài Viết Mới</h1>
-
-<%=form_for :news,url: {action:"create"} do |f| %>
-	<%=f.label :title %>
- 	<%= f.text_field :title,class: "form-control" %>
- 	<%=f.label :description %>
- 	<%= f.text_field :description,class: "form-control" %>
- 	
-	<div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content,class: "ckeditor" %>
-	</div>
-  <%= f.submit "Create",class:"btn btn-default" %>
-  </div>
-  <div class="col-lg-4">
- <%  def dequy(parent,char)
+ <%  def dequy(parent,char="")
             @category=Category.all
             @children=[]
             if parent.nil?
@@ -31,17 +13,32 @@
             <%=raw "<ul>" %>
             <% @children.each do |value,key|
                 %>
-                <%=check_box_tag(:category_id,value.id)%>
-                <%=label_tag(:category_id,char+value.name) %>
-                
-                
+               <input type="checkbox" name="news[category_id]" value="<%=value.id %>" id="category_id">
+               <label for="category_id"><%=value.name%></label>
                 <% dequy(value.id,char="")
                 @children.delete(key)
             end %>
             <%=raw "</ul>" %>
             <% return @children if @children.nil? 
-        end%>                   
-	<%= dequy(0,"")%>	
+        end%> 
+<!-- Hàm đệ quy -->
+<div class="col-lg-8">
+	
+
+<h1>Thêm Bài Viết Mới</h1>
+<%=form_for :news,url: {action:"create"} do |f| %>
+	<%=f.label :title %>
+ 	<%= f.text_field :title,class: "form-control" %>
+ 	<%=f.label :description %>
+ 	<%= f.text_field :description,class: "form-control" %>
+	<div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content,class: "ckeditor" %>
+	</div>
+  <%= f.submit "Create",class:"btn btn-default" %>
+  </div>
+  <div class="col-lg-4">           
+	<%= dequy(0,"")%>
 	</div>
 	<% end%>
 <%end%>

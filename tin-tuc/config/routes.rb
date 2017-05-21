@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   		get "/them-moi",to: "new#add",as: "themmoi"
       post "/create",to: "new#create"
       delete "/delete/:id",to: "new#delete",as:"delete"
+      get "/edit/:id",to: "new#edit",as:"edit"
+      put "/update/:id",to: "new#update",as: "update"
     end
 
     scope "category" do

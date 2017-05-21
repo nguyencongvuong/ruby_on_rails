@@ -4,6 +4,7 @@ class Admin::NewController < ApplicationController
 	  		def index		
 			end
 			def create
+				
 				@news=New.new
 				@news.title=params[:news][:title]
 				@news.description=params[:news][:description]
@@ -17,6 +18,9 @@ class Admin::NewController < ApplicationController
 			end
 			def edit
 				@news=new
+			end
+			def update
+
 			end
 			def news
 				@news=New.all

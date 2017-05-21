@@ -18,25 +18,32 @@
                                 </thead>
                                 <tbody>
                                 <%@phantrang=paginate(10,admin_news_path(),New)%>    
-                                <%@phantrang[:query].each do |new| %>
+                                <% if @phantrang[:query].size >0 %>
+                                <% @phantrang[:query].each do |new| %>
 									 <tr>
                                         <td><%=new.title%></td>
                                         <td><%=new.slug%></td>
                                         <td><%=new.description%></td>
-                                        <td><%=Category.find(new.category_id).name%></td>
+                                        <td><%=Category.find(new.category_id).name %></td>
                                         <td><%=new.created_at%></td>
                                         <td><%=new.updated_at%></td>
                                         <td><%=button_to admin_delete_path(new),method:"delete",class:"btn btn-danger",data: {confirm:"Bạn có chắc chắn muốn xóa"} do%>
                                          <span class="glyphicon glyphicon-trash"></span>
                                             <%end%>
                                         </td>
-                                        <td><%=button_to admin_delete_path(new),method:"put",class:"btn btn-success",data: {confirm:"Bạn có chắc chắn muốn xóa"} do%>
+                                        <td><%=button_to admin_edit_path(new),method:"put",class:"btn btn-success" do%>
                                          <span class="glyphicon glyphicon-edit"></span>
                                             <%end%>
                                         </td>
                                     </tr>
+
+                                    
                                 <%end%>
-                                
+                                <%else%>
+                                <tr>
+                                    <td colspan="7">Không có bài viết nào</td>
+                                </tr>
+                                <%end%>
                                  
                                 </tbody>
                             </table>
