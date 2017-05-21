@@ -1,25 +1,52 @@
 <%content_for :content do %>
+<%def dequy(parent=0,char="")
+            @category=Category.all
+            @children=[]  
+            @category.each do |cat|
+                if cat.parent==parent
+                    @children.push(cat)	
+                end	
+            end %>
+            <% char+="- "%>
+            <% char="" if parent==0 %>
+            <% @children.each do |value,key|
+                %>
+                <%if value.id==@category.id  %>
+                <%=raw "<option value='#{value.id}' selected >" %>
+                <%else%>
+                <%=raw "<option value='#{value.id}' >" %>
+                <%end%>     	
+              
+                <%=char+value.name%>
+              <%=raw '</option>' %>
+                <% dequy(value.id,char=char) %>
+            <%end %>
+	<%end%> 
 	<ul>
 	
 	</ul>
 	<div class="col-lg-6">
-	<%@arr=["tin tuc",1],["the thao",2] %>
-
-	<%=form_for :category, url: {action:"update"},method: "put" do |f| %>
+	<%=form_for :category, url: {action:"save"} do |f| %>
 		<%=f.label :name %>
 		<%=f.text_field :name,class: "form-control" %>
 		<%=f.label :slug %>
 		<%=f.text_field :slug,class: "form-control" %>
 		<%=f.label :description %>
 		<%=f.text_field :description,class: "form-control" %>
-		<%=f.submit "Update",class: "btn  btn-default" %>
-		<%Category.all do |cat|%>
-		<% array=[cat.name,cat.id]%>
-		<%end%>
-	<%= f.select(:parent, options_for_select([["Parent",0]]),class:"form-control") %>
+		<label for="parent">Parent</label>
+		
+		<select name='category[parent]' id='parent' class='form-control'>
+		<option value='0'>Select Parent</option>                
+		<%= dequy%>
+		</select> 
+		<%=f.submit "Create",class: "btn  btn-default" %>
+		<% 
+		Category.all.each do |cat|%>
+		<% 
+		@array=[cat.name,cat.id]%>	
+		<%end%>	
 	<%end%>
 	</div>
-
 	<%end%>
 	
 	

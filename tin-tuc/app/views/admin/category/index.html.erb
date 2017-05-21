@@ -11,7 +11,7 @@
             <% char="" if parent==0 %>
             <% @children.each do |value,key|
                 %>     	
-              <%=raw "<option value='#{value.id}'>" %>
+              <%=raw "<option value='#{value.id}' >" %>
                 <%=char+value.name%>
               <%=raw '</option>' %>
                 <% dequy(value.id,char=char) %>
@@ -21,7 +21,6 @@
 	
 	</ul>
 	<div class="col-lg-6">
-	<%@arr=["tin tuc",1],["the thao",2] %>
 	<%=form_for :category, url: {action:"save"} do |f| %>
 		<%=f.label :name %>
 		<%=f.text_field :name,class: "form-control" %>
@@ -68,7 +67,7 @@
 				<span class="glyphicon glyphicon-trash"></span>
 				<%end%>		
 			</td>
-			<td><%=button_to admin_category_edit_path(c.id),data: {confirm:'Are you sure you want to delete this password?'},class:"btn btn-success",method:"PUT" do%>
+			<td><%=button_to admin_category_edit_path(c),class:"btn btn-success",method:"get" do%>
                 <span class="glyphicon glyphicon-edit"></span>
 				<%end%>
 			</td>
