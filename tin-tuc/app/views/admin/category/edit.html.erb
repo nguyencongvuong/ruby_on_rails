@@ -13,6 +13,9 @@
 		<%=f.label :description %>
 		<%=f.text_field :description,class: "form-control" %>
 		<%=f.submit "Update",class: "btn  btn-default" %>
+		<%Category.all do |cat|%>
+		<% array=[cat.name,cat.id]%>
+		<%end%>
 	<%= f.select(:parent, options_for_select([["Parent",0]]),class:"form-control") %>
 	<%end%>
 	</div>

@@ -1,6 +1,7 @@
 class Admin::CategoryController < ApplicationController
 	layout "backend/_master"
-	helper :application
+	include ApplicationHelper
+	# include CategoryHelper
 	def index
 	end
 	def create

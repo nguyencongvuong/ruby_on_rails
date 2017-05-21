@@ -1,9 +1,8 @@
 class Admin::NewController < ApplicationController
 	layout "backend/_master"
-	  		def index
-	  			
+	include ApplicationHelper
+	  		def index		
 			end
-
 			def create
 				@news=New.new
 				@news.title=params[:news][:title]
@@ -15,9 +14,7 @@ class Admin::NewController < ApplicationController
 				else
 					render "admin/new/add"
 				end
-
 			end
-
 			def edit
 				@news=new
 			end
@@ -25,8 +22,7 @@ class Admin::NewController < ApplicationController
 				@news=New.all
 			end
 			def add
-				@news=New.new
-				
+				@news=New.new				
 			end
 			def delete
 				@news=New.find(params[:id])

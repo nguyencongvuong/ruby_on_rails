@@ -13,8 +13,41 @@
 		<%=f.label :description %>
 		<%=f.text_field :description,class: "form-control" %>
 		<%=f.submit "Create",class: "btn  btn-default" %>
-	<%= f.select(:parent, options_for_select([["Parent",0]])) %>
+		<% 
+		Category.all.each do |cat|%>
+		<% 
+		@array=[cat.name,cat.id]%>
+		
+		<%end%>
+		<%  def dequy(parent=0,char="")
+            @category=Category.all
+            @children=[] 
+            @i=0
+            @category.each do |cat|
+                if cat.parent==parent
+                    @children.push(cat)
+                end
+            end %>
+            <% @children.each do |value,key|
+                %>
+                <% if value.parent==0 %>
+                <% @char=""%>
+                <%else%>
+                 <% @char+="-"%>
+                <%end%>
+              <%=raw "<option value='#{value.id}'>" %>
+                <%=@char+value.name%>
+              <%=raw '</option>' %>
+                <%
+                dequy(value.id,@char) 
+            end %>
+            <%end%> 
+<%=raw "<select name='category[parent]' id='parent'>"%>  
+<option value='0'>Select Parent</option>                
+<%= dequy%>
+<%=raw "</select>"%>  
 	<%end%>
+
 	</div>
 
 <div class="col-lg-6">
@@ -35,7 +68,9 @@
 		<% if Category.all.size==0 %>
 		<td colspan="5">Không Tồn Tại</td>
 		<%end%>
-		<%Category.all.each do |c,key| %>
+		<%@phantrang=paginate(5,admin_category_path(),Category)%>    
+        <%@phantrang[:query].each do |c,key| %>
+		
 		<tr>
 			<td><%=c.name %></td>
 			<td><%=c.slug %></td>
@@ -52,7 +87,15 @@
 		</tr>
 		<%end%>
 	</table>
+	<div class="col-xs-12" style="text-align: center;">  
+        <ul class="pagination" >
+            <%@phantrang[:link].each do |url|%>
+            <%=url %>
+            <%end%>
+        </ul>
+     </div>
 </div>
+ 	
 	<%end%>
 
 	
