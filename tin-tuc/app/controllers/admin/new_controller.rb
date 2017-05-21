@@ -17,10 +17,20 @@ class Admin::NewController < ApplicationController
 				end
 			end
 			def edit
-				@news=new
+				@news=New.find(params[:id])
+				
 			end
 			def update
-
+				@news=New.find(params[:id])
+				@news.title=params[:news][:title]
+				@news.description=params[:news][:description]
+				@news.content=params[:news][:content]
+				@news.category_id=params[:news][:category_id]
+				if @news.save
+					redirect_to :action=>"news"
+				else
+					render "admin/new/edit"
+				end
 			end
 			def news
 				@news=New.all

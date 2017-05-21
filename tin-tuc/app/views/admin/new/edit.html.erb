@@ -4,7 +4,8 @@
 
 <h1>Thêm Bài Viết Mới</h1>
 
-<%=form_for :news,url: {action:"create"} do |f| %>
+<%=form_for :news,url: {action:"update"},method: "PUT" do |f| %>
+	
 	<%=f.label :title %>
  	<%= f.text_field :title,class: "form-control" %>
  	<%=f.label :description %>
@@ -17,7 +18,29 @@
   <%= f.submit "Create",class:"btn btn-default" %>
   </div>
   <div class="col-lg-4">
- 	
+ <%  def dequy(parent,char)
+            @category=Category.all
+            @children=[]
+            if parent.nil?
+                parent=parent
+            end
+            @category.each do |cat|
+                if cat.parent==parent
+                    @children.push(cat)
+                end
+            end %>
+            <%=raw "<ul>" %>
+            <% @children.each do |value,key|
+                %>
+                <input type="checkbox" name="news[category_id]" value="<%=value.id%>" <%="checked" if value.id==@news.category_id %> >
+                <label for="category_id"><%=value.name%></label>
+                <% dequy(value.id,char="")
+                @children.delete(key)
+            end %>
+            <%=raw "</ul>" %>
+            <% return @children if @children.nil? 
+        end%>                   
+	<%= dequy(0,"")%>	
 	</div>
 	<% end%>
 <%end%>
