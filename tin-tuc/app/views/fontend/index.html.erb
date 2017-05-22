@@ -1,5 +1,13 @@
 <%@assets="/assets"%>
 <%content_for :content do%>
+<% def homepage(category) %>
+    <% @array=Array.new() %>
+    <% @category.each do |cat| %>
+    <% @array.push([cat,Category.where(parent:cat.id)]) %>
+    <%end%>
+    <%return @array%>
+<%end%>
+<% @home=homepage(Category.where(parent:0)) %>
 
     <!-- Page Content -->
     <div class="container">
@@ -44,88 +52,19 @@
                     <li href="#" class="list-group-item menu1 active">
                     	Menu
                     </li>
-
+                    <%@home.each do |x|%>
                     <li href="#" class="list-group-item menu1">
-                    	Level 1
+                    <%=x[0].name %>
                     </li>
                     <ul>
+                    <%x[1].each do |y| %>
                 		<li class="list-group-item">
-                			<a href="#">Level2</a>
+                			<a href="#"><%=y.name%></a>
                 		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
+                		
+                        <%end%>
                     </ul>
-
-                    <li href="#" class="list-group-item menu1">
-                    	<a href="#">Level 1</a>
-                    </li>
-                    <ul>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                    </ul>
-
-
-                    <li href="#" class="list-group-item menu1">
-                    	<a href="#">Level 1</a>
-                    </li>
-
-                    <ul>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                    </ul>
-
-
-                    <li href="#" class="list-group-item menu1">
-                    	<a href="#">Level 1</a>
-                    </li>
-                    <ul>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                    </ul>
-
-                    <li href="#" class="list-group-item menu1">
-                    	<a href="#">Level 1</a>
-                    </li>
-                    <li href="#" class="list-group-item menu1">
-                    	<a href="#">Level 1</a>
-                    </li>
+                    <%end%>
                 </ul>
             </div>
 
@@ -137,14 +76,12 @@
 
 	            	<div class="panel-body">
 	            		<!-- item -->
-	            	
-                        
-	            		<%@category.each do |cat|%>
+	            	    <%@home.each do |x|%>
 					    <div class="row-item row">
 		                	<h3>
-		                		<a href="category.html"><%=cat.name %></a> | 	
-                                <%Category.where(parent:cat.id).each do |item| %>
-		                		<small><a href="category.html"><i><%=item.name%></i></a>/</small>
+		                		<a href="category.html"><%=x[0].name %></a> | 	
+                                <%x[1].each do |y| %>
+		                		<small><a href="category.html"><i><%=y.name %></i></a>/</small>
 		                		<%end%>
 		                	</h3>
 		                	<div class="col-md-8 border-right">
@@ -164,7 +101,17 @@
 		                    
 
 							<div class="col-md-4">
+                            <%x[1].each do |y| %>
+                                <%New.where(category_id:y.id).limit(5).order("id desc").each do |new| %>
 								<a href="detail.html">
+									<h4>
+										<span class="glyphicon glyphicon-list-alt"></span>
+										<%=new.title%>
+									</h4>
+								</a>
+                                <%end%>
+                           <%end%>
+							<!-- 	<a href="detail.html">
 									<h4>
 										<span class="glyphicon glyphicon-list-alt"></span>
 										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -183,19 +130,12 @@
 										<span class="glyphicon glyphicon-list-alt"></span>
 										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 									</h4>
-								</a>
-
-								<a href="detail.html">
-									<h4>
-										<span class="glyphicon glyphicon-list-alt"></span>
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									</h4>
-								</a>
+								</a> -->
 							</div>
-							
+							 
 							<div class="break"></div>
 		                </div>
-                        <%end%>
+                         <%end%>
 		                <!-- end item -->
 		                <!-- item -->
 
