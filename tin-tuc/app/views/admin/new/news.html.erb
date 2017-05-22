@@ -19,7 +19,7 @@
                                 <tbody>
                                 <%@phantrang=paginate(10,admin_news_path(),New)%>    
                                 <% if @phantrang[:query].size >0 %>
-                                <% @phantrang[:query].each do |new| %>
+                                <% @phantrang[:query].order('id desc').each do |new| %>
 									 <tr>
                                         <td><%=new.title%></td>
                                         <td><%=new.slug%></td>

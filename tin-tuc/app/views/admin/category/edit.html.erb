@@ -11,12 +11,11 @@
             <% char="" if parent==0 %>
             <% @children.each do |value,key|
                 %>
-                <%if value.id==@category.id  %>
+                <%if value.id==Category.find(params[:id]).parent  %>
                 <%=raw "<option value='#{value.id}' selected >" %>
                 <%else%>
                 <%=raw "<option value='#{value.id}' >" %>
                 <%end%>     	
-              
                 <%=char+value.name%>
               <%=raw '</option>' %>
                 <% dequy(value.id,char=char) %>
@@ -26,7 +25,7 @@
 	
 	</ul>
 	<div class="col-lg-6">
-	<%=form_for :category, url: {action:"save"} do |f| %>
+	<%=form_for :category, url: {action:"update"},method: "put" do |f| %>
 		<%=f.label :name %>
 		<%=f.text_field :name,class: "form-control" %>
 		<%=f.label :slug %>
@@ -34,7 +33,6 @@
 		<%=f.label :description %>
 		<%=f.text_field :description,class: "form-control" %>
 		<label for="parent">Parent</label>
-		
 		<select name='category[parent]' id='parent' class='form-control'>
 		<option value='0'>Select Parent</option>                
 		<%= dequy%>
@@ -48,6 +46,6 @@
 	<%end%>
 	</div>
 	<%end%>
-	
+		
 	
 	

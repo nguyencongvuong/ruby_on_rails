@@ -21,7 +21,7 @@ class Admin::CategoryController < ApplicationController
 		end
 	end
 	def delete
-		@category=Category.find(params[:id]);
+		@category=Category.find(params[:id])
 		if @category.destroy
 			redirect_to admin_category_path()
 		end
@@ -30,7 +30,8 @@ class Admin::CategoryController < ApplicationController
 		@category=Category.find(params[:id])
 	end
 	def update
-		@category=Category.find(params[:id]);
+		# render html:params[:category].inspect
+		@category=Category.find(params[:id])
 		@category.name=params[:category][:name]
 		@category.slug=params[:category][:slug]
 		@category.description=params[:category][:description]

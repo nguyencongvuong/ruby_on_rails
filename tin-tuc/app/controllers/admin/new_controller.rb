@@ -1,15 +1,18 @@
 class Admin::NewController < ApplicationController
 	layout "backend/_master"
+
 	include ApplicationHelper
-	  		def index		
+	  		def index
+	  			render "admin/index"		
 			end
 			def create
 				
-				@news=New.new
-				@news.title=params[:news][:title]
-				@news.description=params[:news][:description]
-				@news.content=params[:news][:content]
-				@news.category_id=params[:news][:category_id]
+				@news=New.new(new_params)
+				# @news.
+				# title=params[:news][:title]
+				# @news.description=params[:news][:description]
+				# @news.content=params[:news][:content]
+				# @news.category_id=params[:news][:category_id]
 				if @news.save
 					redirect_to :action=>"news"
 				else
@@ -20,13 +23,14 @@ class Admin::NewController < ApplicationController
 				@news=New.find(params[:id])
 				
 			end
+
 			def update
 				@news=New.find(params[:id])
-				@news.title=params[:news][:title]
-				@news.description=params[:news][:description]
-				@news.content=params[:news][:content]
-				@news.category_id=params[:news][:category_id]
-				if @news.save
+				# @news.title=params[:news][:title]
+				# @news.description=params[:news][:description]
+				# @news.content=params[:news][:content]
+				# @news.category_id=params[:news][:category_id]
+				if @news.update(new_params)
 					redirect_to :action=>"news"
 				else
 					render "admin/new/edit"
@@ -44,5 +48,9 @@ class Admin::NewController < ApplicationController
 				if @news.destroy
 					redirect_to :action=>"news"
 				end
+			end
+			private
+			def new_params
+				params.require(:news).permit(:title, :description, :category_id, :content)
 			end
 end

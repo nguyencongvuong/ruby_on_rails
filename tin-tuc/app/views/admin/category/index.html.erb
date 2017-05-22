@@ -7,7 +7,7 @@
                     @children.push(cat)	
                 end	
             end %>
-            <% char+="- "%>
+            <% char+="-- "%>
             <% char="" if parent==0 %>
             <% @children.each do |value,key|
                 %>     	
@@ -18,7 +18,6 @@
             <%end %>
 	<%end%> 
 	<ul>
-	
 	</ul>
 	<div class="col-lg-6">
 	<%=form_for :category, url: {action:"save"} do |f| %>
@@ -56,8 +55,8 @@
 		<% if Category.all.size==0 %>
 		<td colspan="5">Không Tồn Tại</td>
 		<%end%>
-		<%@phantrang=paginate(5,admin_category_path(),Category)%>    
-        <%@phantrang[:query].each do |c,key| %>
+		<%@phantrang=paginate(12,admin_category_path(),Category)%>    
+        <%@phantrang[:query].order('id desc').each do |c,key| %>
 		<tr>
 			<td><%=c.name %></td>
 			<td><%=c.slug %></td>
@@ -82,7 +81,6 @@
         </ul>
      </div>
 </div>
- 	
 	<%end%>
 
 	
