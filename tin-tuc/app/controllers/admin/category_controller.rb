@@ -9,21 +9,21 @@ class Admin::CategoryController < ApplicationController
 	end
 	def save
 		@news=New.new
-		@category=Category.new
-		@category.slug=params[:category][:slug]
-		@category.name=params[:category][:name]
-		@category.description=params[:category][:descreption]
-		@category.parent=params[:category][:parent]
-		@category.save
-		# render html: convert("string")
+		@category=Category.new(param)	
+		# render html: convert("string")	
 		if @category.save
-			redirect_to admin_category_path()
+			respond_to do |format|
+			format.html {redirect_to admin_category_path(), notice: "Bạn vừa tạo thành công một chuyên mục: #{@category.name}" }
+			end
 		end
 	end
 	def delete
 		@category=Category.find(params[:id])
-		if @category.destroy
-			redirect_to admin_category_path()
+		@title=@category.name
+		respond_to do |format| 
+			if @category.destroy
+				format.html {redirect_to admin_category_path(),notice:"Bạn vừa xóa thành công chuyên mục: #{@title}"}
+			end
 		end
 	end
 	def edit
@@ -32,13 +32,15 @@ class Admin::CategoryController < ApplicationController
 	def update
 		# render html:params[:category].inspect
 		@category=Category.find(params[:id])
-		@category.name=params[:category][:name]
-		@category.slug=params[:category][:slug]
-		@category.description=params[:category][:description]
-		@category.parent=params[:category][:parent]
-		@category.save
-		if @category.save
-			redirect_to admin_category_path()
+		@category.update(param)
+		if @category.update(param)
+			respond_to do |format|
+			format.html {redirect_to admin_category_path(),notice: "Bạn vừa update thành công chuyên mục: #{@category.name}"}
+			end
 		end
+	end
+	private
+	def param
+		params.require(:category).permit(:name,:slug,:description,:parent)
 	end
 end

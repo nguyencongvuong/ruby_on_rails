@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 20170518152239) do
     t.index ["type"], name: "index_ckeditor_assets_on_type"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "new_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "news", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

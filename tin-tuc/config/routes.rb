@@ -21,8 +21,8 @@ Rails.application.routes.draw do
       put "/update/:id",to:"category#update",as:"category_update"
     end
   end
-  namespace '/' do
-  	
+  scope '/' do
+  	get "/:category/:slug",to: "fontend#detail",as: "fontend_detail"
   end
   root "fontend#index"
 end

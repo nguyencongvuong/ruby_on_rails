@@ -1,4 +1,5 @@
 class New < ApplicationRecord
+	has_many :comments
 	include ApplicationHelper
 	validates :title,presence:true
 	validates :content,presence:true
@@ -9,14 +10,18 @@ class New < ApplicationRecord
 	private
 	def convert(id="")
 		if id==""
-		self.slug=convert_string(title)+"-"+"#{New.last.id+1}"
+			if New.last.nil?
+				@id_last=0
+			else
+				@id_last=New.last.id
+			end
+		self.slug=convert_string(title)+"-"+"#{@id_last+1}"
 		else
 		self.slug=convert_string(title)+"-"+"#{id}"
 		end
 	end
 	private
 	def around_save
-		
 		return convert(id)
 	end
 end

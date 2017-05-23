@@ -5,4 +5,7 @@ class FontendController < ApplicationController
 		@category=Category.where(parent:0)
 		
 	end
+	def detail
+		@new=New.where(slug: params[:slug])
+	end
 end

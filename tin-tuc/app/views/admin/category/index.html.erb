@@ -20,6 +20,11 @@
 	<ul>
 	</ul>
 	<div class="col-lg-6">
+	<%unless notice.nil?%>
+		<div class="alert alert-success">
+	  	<strong><%=notice%></strong>
+		</div>
+	<%end%>
 	<%=form_for :category, url: {action:"save"} do |f| %>
 		<%=f.label :name %>
 		<%=f.text_field :name,class: "form-control" %>
