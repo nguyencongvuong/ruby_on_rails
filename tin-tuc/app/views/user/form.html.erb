@@ -1,0 +1,42 @@
+<div class="container" style="min-height: 600px">
+	<div style="margin: 0 auto;">
+		<%=form_for :user,url: {action: "create"},method: "post" do |f| %>
+			<div class="form-group">
+			<%=f.label :name %>
+			<%=f.text_field :name,class: "form-control",placeholder:"Name" %>
+			</div>
+			<div class="form-group">
+			<%=f.label :email%>
+			<%=f.text_field :email,class: "form-control",placeholder:"Email" %>
+			</div>
+			<div class="form-group">
+			<%=f.label :password%>
+			<%=f.password_field :password,class: "form-control",placeholder:"Password" %>
+			</div>
+			<div class="form-group">
+			<%=f.label :password_confirmation%>
+			<%=f.password_field :password_confirmation,class: "form-control",placeholder:"Password Confirmation"%>
+			</div>
+			<%=f.submit "Create",class:"btn btn-default" %>
+		<%end%>
+	</div>
+</div>
+<!-- <div class="container">
+    <div class="row">
+    <h2>Vertical Form</h2>
+        <form>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label>Mật Khẩu</label>
+            <input type="password" class="form-control" placeholder="Password">
+            
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox"> Ghi Nhớ</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+   </form>
+</div> -->

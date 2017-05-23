@@ -13,6 +13,7 @@ class Admin::CategoryController < ApplicationController
 		# render html: convert("string")	
 		if @category.save
 			respond_to do |format|
+				
 			format.html {redirect_to admin_category_path(), notice: "Bạn vừa tạo thành công một chuyên mục: #{@category.name}" }
 			end
 		end

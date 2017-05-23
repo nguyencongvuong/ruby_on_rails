@@ -21,8 +21,15 @@ Rails.application.routes.draw do
       put "/update/:id",to:"category#update",as:"category_update"
     end
   end
+  scope "/user" do
+    get "/register",to: "user#register",as: "user_register"
+    post "/create",to: "user#create",as: "user_create"
+    get "/show",to: "user#show",as: "user_show"
+  end
   scope '/' do
   	get "/:category/:slug",to: "fontend#detail",as: "fontend_detail"
+
   end
+  
   root "fontend#index"
 end
