@@ -1,6 +1,17 @@
 <div class="container" style="min-height: 600px">
+	
+		<%if @user.errors.any? %>
+		<div id="error_explanation" class="alert alert-warning">
+		     <ul>
+		     <% @user.errors.full_messages.each do |msg|%>
+		     	<li><%=msg%></li>
+		     <%end%>
+		     </ul>
+		</div>
+		<%end%>
+	<%= notice if notice %>
 	<div style="margin: 0 auto;">
-		<%=form_for :user,url: {action: "create"},method: "post" do |f| %>
+		<%=form_for @user,url: {action: "create"},method: "post" do |f| %>
 			<div class="form-group">
 			<%=f.label :name %>
 			<%=f.text_field :name,class: "form-control",placeholder:"Name" %>
