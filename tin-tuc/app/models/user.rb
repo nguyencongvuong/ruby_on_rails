@@ -1,6 +1,5 @@
 
 class User < ApplicationRecord
-
 	has_secure_password
 	has_many :comments 
 	validates :name, presence: true, on: :create #format: { with: /\a[a-zA-Z]+\z/,message: "chỉ bao gồm các chữ cái" }

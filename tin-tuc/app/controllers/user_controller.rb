@@ -25,15 +25,14 @@ layout "fontend/_user"
 	end
 	def active
 		@user=User.find_by(password_digest: "#{params[:slug]}")
-		
 			unless @user.nil?
 			@user.update(active:"active")
 				render html: "Bạn đã active thành công"
 			else
 			render "user/show"
 			end
-		
 	end
+	
 	private
 	def param
 		params.require(:user).permit(:name,:email,:password_digest,:password,:password_confirmation)

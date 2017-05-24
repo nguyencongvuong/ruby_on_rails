@@ -26,6 +26,10 @@ Rails.application.routes.draw do
     post "/create",to: "user#create",as: "user_create"
     get "/show",to: "user#show",as: "user_show"
     get '/active/:slug',to: "user#active",as: "user_active"
+    post "/session/create",to: "session#create",as: "session_create"
+    get "/login",to: "session#login",as:"session_login"
+    get "/show/:id",to: "session#show",as: "user"
+
   end
   scope '/' do
   	get "/:category/:slug",to: "fontend#detail",as: "fontend_detail"

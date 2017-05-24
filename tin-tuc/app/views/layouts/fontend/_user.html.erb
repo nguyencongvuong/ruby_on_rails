@@ -57,20 +57,24 @@
                     <li>
                         <a href="<%=user_register_path()%>">Đăng ký</a>
                     </li>
+                    <%unless session[:user]%>
                     <li>
-                        <a href="#">Đăng nhập</a>
+                        <a href="<%=session_login_path%>">Đăng nhập</a>
                     </li>
+                    <%end%>
+                    <% if session[:user]%>
                     <li>
-                        <a>
+                        <a href="<%=user_path(session[:user]["id"])%>">
                             <span class ="glyphicon glyphicon-user"></span>
-                            Bùi Đức Phú
+                            <%=session[:user]["name"]%>
                         </a>
                     </li>
-
+                    <%end%>
+                    <%if session[:user]%>
                     <li>
                         <a href="#">Đăng xuất</a>
                     </li>
-                    
+                    <%end%>
                 </ul>
             </div>           
             <!-- /.navbar-collapse -->
