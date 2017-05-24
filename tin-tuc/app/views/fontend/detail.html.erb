@@ -30,45 +30,43 @@
                 <!-- Blog Comments -->
 
                 <!-- Comments Form -->
+                <%if session[:user]%>
                 <div class="well">
                     <h4>Viết bình luận ...<span class="glyphicon glyphicon-pencil"></span></h4>
-                    <form role="form">
+                    <%=form_for :comment, url: {action:"comment",} do |f| %>
                         <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <%=f.text_area :content,class:"form-control"%>
+                            <%=f.hidden_field :new_id,:value=>getslug(params[:slug])%>
+                            <%=f.hidden_field :user_id,:value=>session['user']['id']%>
                         </div>
-                        <button type="submit" class="btn btn-primary">Gửi</button>
-                    </form>
+                        <%=f.submit "submit",class:"btn btn-primary"%>
+                    <%end%>
                 </div>
-
+                <%else%>
+                Bạn cần phải đăng nhập để có thể tham gia bình luận...
+                <%end%>
                 <hr>
 
                 <!-- Posted Comments -->
 
                 <!-- Comment -->
+                <%comments.each do |comment|%>
                 <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
+                
+    
 
-                <!-- Comment -->
-                <div class="media">
                     <a class="pull-left" href="#">
                         <img class="media-object" src="http://placehold.it/64x64" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
+                        <h4 class="media-heading"><%=comment[0][:user_name].name%>
+                            <small><%=comment[0][:time]%><!-- August 25, 2014 at 9:30 PM --></small>
                         </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        <%=comment[0][:content]%>
                     </div>
                 </div>
+                <%end%>
+                <!-- Comment -->
 
             </div>
 

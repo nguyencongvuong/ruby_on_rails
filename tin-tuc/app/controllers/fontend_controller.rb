@@ -7,5 +7,16 @@ class FontendController < ApplicationController
 	end
 	def detail
 		@new=New.where(slug: params[:slug])
+
+	end
+	def comment
+		@comment=Comment.new(param)
+		if @comment.save
+			render html:"save"
+		end
+	end
+	private 
+	def param
+		params.require(:comment).permit!
 	end
 end
