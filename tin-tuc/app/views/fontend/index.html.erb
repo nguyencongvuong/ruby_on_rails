@@ -54,13 +54,13 @@
                     	Menu
                     </li>
                     <%@home.each do |x|%>
-                    <li href="#" class="list-group-item menu1">
-                    <%=x[0].name %>
+                    <li href="" class="list-group-item menu1">
+                    <a href ><%=x[0].name %></a>
                     </li>
                     <ul>
                     <%x[1].each do |y| %>
                 		<li class="list-group-item">
-                			<a href="<%=fontend_category_path(category:x[0].slug)%>"><%=y.name%></a>
+                			<a href="<%=fontend_category_path(category:y.slug)%>"><%=y.name%></a>
                 		</li>
                         <%end%>
                     </ul>
@@ -149,6 +149,5 @@
 
     <!-- Footer -->
     <hr>
-
 <%end%>
 

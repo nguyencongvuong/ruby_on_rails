@@ -21,6 +21,10 @@ class FontendController < ApplicationController
 	def category
 		
 	end
+	def search
+		@key=params[:s]
+		@equal=New.where("title LIKE ?","%#{@key}%")
+	end
 	private 
 	def param
 		params.require(:comment).permit!

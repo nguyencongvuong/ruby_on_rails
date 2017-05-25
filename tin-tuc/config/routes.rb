@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   end
   
   scope '/' do
+    get "/search",to:"fontend#search",as: "fontend_search"
     get "/:category",to: "fontend#category",as: "fontend_category"
   	get "/:category/:slug",to: "fontend#detail",as: "fontend_detail"
     post "/comment/create",to:"fontend#comment",as: "fontend_comment"

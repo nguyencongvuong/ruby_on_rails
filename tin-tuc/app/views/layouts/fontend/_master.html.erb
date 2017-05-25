@@ -45,14 +45,13 @@
                         <a href="#">Liên hệ</a>
                     </li>
                 </ul>
-
-                <form class="navbar-form navbar-left" role="search">
+                <form class="navbar-form navbar-left" action="<%=fontend_search_path%>" role="search">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Search">
+                      <input type="text" name="s" class="form-control" placeholder="Search">
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-default">Search</button>
                 </form>
-
+              
                 <ul class="nav navbar-nav pull-right">
                     <li>
                         <a href="<%=user_register_path()%>">Đăng ký</a>
