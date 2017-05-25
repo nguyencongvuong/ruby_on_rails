@@ -5,15 +5,21 @@ class FontendController < ApplicationController
 		@category=Category.where(parent:0)
 		
 	end
+
 	def detail
 		@new=New.where(slug: params[:slug])
-
 	end
+
 	def comment
 		@comment=Comment.new(param)
 		if @comment.save
-			render html:"save"
+			respond_to do |format|
+			format.html {redirect_to "#{session[:back]}"}
+			end
 		end
+	end
+	def category
+		
 	end
 	private 
 	def param

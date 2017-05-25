@@ -57,23 +57,24 @@
                     <li>
                         <a href="<%=user_register_path()%>">Đăng ký</a>
                     </li>
-                   <%unless session[:user]%>
+                    <%if !session[:user] || session[:user].empty?%>
                     <li>
                         <a href="<%=session_login_path%>">Đăng nhập</a>
                     </li>
                     <%end%>
-                    <% if session[:user] %>
+                    <%if session[:user] && !session[:user].empty?%>
                     <li>
                         <a href="<%=user_path(session[:user]["id"])%>">
                             <span class ="glyphicon glyphicon-user"></span>
-                           <%=session[:user]["name"]%>
+                            <%=session[:user]["name"]%>
                         </a>
                     </li>
                     <%end%>
+                     <%if session[:user] && !session[:user].empty?%>
                     <li>
-                        <a href="#">Đăng xuất</a>
+                        <a href="<%=logout_path%>">Đăng xuất</a>
                     </li>
-                    
+                    <%end%>
                 </ul>
             </div>           
             <!-- /.navbar-collapse -->
@@ -84,13 +85,13 @@
 <%=yield :content %>
 
 <%=yield%>
-<footer>
+<!-- <footer>
         <div class="row">
             <div class="col-md-12">
                 <p>Copyright &copy; Your Website 2014</p>
             </div>
         </div>
-    </footer>
+    </footer> -->
     <!-- end Footer -->
     <!-- jQuery -->
     <script src="<%=@assets%>/jquery.js"></script>
@@ -100,3 +101,6 @@
 </body>
 
 </html>
+
+
+

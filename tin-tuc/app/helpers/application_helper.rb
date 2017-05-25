@@ -8,7 +8,7 @@ module ApplicationHelper
         @convert=@convert.gsub(/[íỉìịĩ]/,"i")
         @convert=@convert.gsub(/[ýỷỳỵỹ]/,"y")
         @convert=@convert.gsub(/[đ]/,"d")
-        @convert=@convert.gsub(/[{}!“”.…–:]/,'')
+        @convert=@convert.gsub(/[{}!“”.…–:?]/,'')
         @convert=@convert.gsub( /\[/,'')
         @convert=@convert.gsub( /\]/,'')
         @convert=@convert.gsub(/[%@&",'"',"'","  ","   "]/," ")

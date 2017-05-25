@@ -1,5 +1,6 @@
 <%@assets="/assets"%>
 <%content_for :content do%>
+<%back(request.url)%>
 <% def homepage(category) %>
     <% @array=Array.new() %>
     <% @category.each do |cat| %>
@@ -59,9 +60,8 @@
                     <ul>
                     <%x[1].each do |y| %>
                 		<li class="list-group-item">
-                			<a href="#"><%=y.name%></a>
+                			<a href="<%=fontend_category_path(category:x[0].slug)%>"><%=y.name%></a>
                 		</li>
-                		
                         <%end%>
                     </ul>
                     <%end%>

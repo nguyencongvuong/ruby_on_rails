@@ -57,12 +57,12 @@
                     <li>
                         <a href="<%=user_register_path()%>">Đăng ký</a>
                     </li>
-                    <%unless session[:user]%>
+                    <%if !session[:user] || session[:user].empty?%>
                     <li>
                         <a href="<%=session_login_path%>">Đăng nhập</a>
                     </li>
                     <%end%>
-                    <% if session[:user]%>
+                    <%if session[:user] && !session[:user].empty?%>
                     <li>
                         <a href="<%=user_path(session[:user]["id"])%>">
                             <span class ="glyphicon glyphicon-user"></span>
@@ -70,9 +70,9 @@
                         </a>
                     </li>
                     <%end%>
-                    <%if session[:user]%>
+                     <%if session[:user] && !session[:user].empty?%>
                     <li>
-                        <a href="#">Đăng xuất</a>
+                        <a href="<%=logout_path%>">Đăng xuất</a>
                     </li>
                     <%end%>
                 </ul>

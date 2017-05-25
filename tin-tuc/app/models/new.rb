@@ -1,5 +1,5 @@
 class New < ApplicationRecord
-	has_many :comments
+	has_many :comments,dependent: :destroy
 	include ApplicationHelper
 	validates :title,presence:true
 	validates :content,presence:true

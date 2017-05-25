@@ -6,4 +6,7 @@ module SessionHelper
 	def login_session(user)
 	session[:user]=@user
 	end
+	def back(url)
+	session[:back]=url
+	end
 end
