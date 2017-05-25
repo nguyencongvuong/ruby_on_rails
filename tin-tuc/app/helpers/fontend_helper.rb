@@ -1,7 +1,9 @@
 module FontendHelper
 		def comments
-			@user=session[:user]["id"]
-			@arr=[]
+			# if session[:user]["id"] && !session[:user]["id"].nil?
+			# @user=session[:user]["id"]
+			# end
+			@arr=Array.new
 			@id=getslug(params[:slug])
 			@comments=Comment.where(new_id:@id).order("created_at desc")
 			@comments.each do |comment|
@@ -9,12 +11,14 @@ module FontendHelper
 			end
 			return @arr
 		end
+
 		def getslug(slug)
 			@id=New.find_by slug: slug
 			@id=@id.id
 			# new=New.find(@id)
 			return @id
 		end
+
 		def back(url)
 		session[:back]=@url
 		end
@@ -33,6 +37,7 @@ module FontendHelper
 				end
 			return @id
 		end
+		
 		def newInCat(id)
 			if id.is_a? Numeric
 				@news=New.where(category_id: id)
