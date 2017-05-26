@@ -56,6 +56,6 @@ class Admin::NewController < ApplicationController
 
 	private
 	def new_params
-		params.require(:news).permit(:title, :description, :category_id, :content)
+		params.require(:news).permit(:title, :description, :category_id, :content,:noi_bat)
 	end
 end

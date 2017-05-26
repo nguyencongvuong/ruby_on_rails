@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524041704) do
+ActiveRecord::Schema.define(version: 20170526074010) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20170524041704) do
     t.integer "author_id"
     t.integer "category_id"
     t.string "slug"
+    t.integer "noi_bat"
   end
 
   create_table "users", force: :cascade do |t|
