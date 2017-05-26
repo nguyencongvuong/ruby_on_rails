@@ -31,7 +31,7 @@ module FontendHelper
 			@cat=Category.find_by slug: slug
 			@parent=@cat.parent
 				if @parent==0
-					@id=Array.new.push(Category.find_by parent: 2)
+					@id=Array.new.push(Category.find_by parent: @parent)
 				else
 					@id=@cat.id
 				end
@@ -46,5 +46,14 @@ module FontendHelper
 		end
 		#đổi 
 	
-	
+		def noibat(id)
+			@new=New.where("noi_bat==:nb AND id <> :id",{nb:1,id:id}).limit(5)
+			return @new
+		end
+		#lấy những bài viết nổi bật khác với bài viết hiện tại 
+		def lienquan(cat_id,id)
+			@new=New.where("category_id ==:cat_id AND id <> :id",{cat_id:cat_id,id:id}).limit(5)
+			return  @new
+		end
+		#lấy bài viết liên quan dựa vào category id của bài viết hiện tại
 end
