@@ -1,5 +1,6 @@
 class FontendController < ApplicationController
 	layout "fontend/_master"
+	include FontendHelper
 	def index
 		@news=New.all
 		@category=Category.where(parent:0)
@@ -7,7 +8,10 @@ class FontendController < ApplicationController
 	end
 
 	def detail
+		@noibat=noibat(getslug(params[:slug]))
+		@comments=comments
 		@new=New.where(slug: params[:slug])
+
 	end
 
 	def comment

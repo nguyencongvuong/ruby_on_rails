@@ -35,7 +35,7 @@ class Admin::NewController < ApplicationController
 	end
 
 	def news
-		@news=New.all
+		@news=New.all.paginate(:page => params[:page], :per_page => 10)
 	end
 
 	def add

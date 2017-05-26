@@ -17,9 +17,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <%@phantrang=paginate(10,admin_news_path(),New)%>    
-                                <% if @phantrang[:query].size >0 %>
-                                <% @phantrang[:query].order('id desc').each do |new| %>
+                               <%if @news.size >0%>
+                                <% @news.order('id desc').each do |new| %>
 									 <tr>
                                         <td><%=new.title%></td>
                                         <td><%=new.slug%></td>
@@ -35,28 +34,21 @@
                                          <span class="glyphicon glyphicon-edit"></span>
                                             <%end%>
                                         </td>
-                                    </tr>
-
-                                    
+                                    </tr>  
                                 <%end%>
                                 <%else%>
                                 <tr>
                                     <td colspan="7">Không có bài viết nào</td>
                                 </tr>
                                 <%end%>
-                                 
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                <div class="col-xs-12" style="text-align: center;">  
-                    <ul class="pagination" >
-                        <%@phantrang[:link].each do |url|%>
-                        <%=url %>
-                        <%end%>
-                    </ul>
-                </div>
+                    <div style="text-align: center;">
+                    <%= will_paginate @news %>
+                    </div>
                 <!-- /.row -->
 
 <%end%>

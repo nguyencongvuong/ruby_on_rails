@@ -52,7 +52,7 @@
                 <!-- Posted Comments -->
 
                 <!-- Comment -->
-                <%comments.each do |comment|%>
+                <%@comments.each do |comment|%>
                 <div class="media">
                     <a class="pull-left" href="#">
                         <img class="media-object" src="http://placehold.it/64x64" alt="">
@@ -99,7 +99,7 @@
                     <div class="panel-body">
 
                         <!-- item -->
-                        <%noibat(getslug(params[:slug])).each do |new|%>
+                        <%@noibat.each do |new|%>
                         <div class="row" style="margin-top: 10px;">
                             <div class="col-md-5">
                                 <a href="detail.html">
