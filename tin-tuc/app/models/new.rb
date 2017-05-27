@@ -1,10 +1,10 @@
 class New < ApplicationRecord
 	has_many :comments,dependent: :destroy
+	default_scope { order('created_at DESC') }
 	include ApplicationHelper
 	validates :title,presence:true
 	validates :content,presence:true
 	belongs_to :category 
-
 	before_create :convert
 	before_update :around_save
 	private

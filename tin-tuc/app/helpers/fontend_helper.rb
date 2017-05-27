@@ -29,12 +29,12 @@ module FontendHelper
 		#đổi category id->slug
 		def getCatId(slug)
 			@cat=Category.find_by slug: slug
-			@parent=@cat.parent
-				if @parent==0
-					@id=Array.new.push(Category.find_by parent: @parent)
-				else
+			# @parent=@cat.parent
+			# 	if @parent==0
+			# 		@id=Array.new.push(Category.find_by parent: @parent)
+			# 	else
 					@id=@cat.id
-				end
+			# 	end
 			return @id
 		end
 		
@@ -56,4 +56,14 @@ module FontendHelper
 			return  @new
 		end
 		#lấy bài viết liên quan dựa vào category id của bài viết hiện tại
+
+		def newByCategory(cat_id)
+			@new=New.where("category_id == :id",{id:cat_id})
+			return @new
+		end
+
+		def catChildren(cat_id)
+			@category_child=Category.where(parent:cat_id)
+			return @category_child
+		end
 end

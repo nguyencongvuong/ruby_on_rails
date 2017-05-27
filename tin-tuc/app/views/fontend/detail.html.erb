@@ -78,12 +78,12 @@
                         <!-- item -->
                         <%lienquan(new.category_id,new.id).each do |item|%>
                         <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <a href="<%=fontend_detail_path(category:categorySlug(item.category_id),slug:item.slug)%>">
                                     <img class="img-responsive" src="image/320x150.png" alt="">
                                 </a>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-8">
                                 <a href="<%=fontend_detail_path(category:categorySlug(item.category_id),slug:item.slug)%>"><b><%=item.title%></b></a>
                             </div>
                             <p><%=item.description%></p>

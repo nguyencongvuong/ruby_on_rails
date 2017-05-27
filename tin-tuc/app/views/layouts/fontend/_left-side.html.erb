@@ -1,0 +1,22 @@
+ <%=yield :sidebar%>
+ <div class="col-md-3 ">
+    <ul class="list-group" id="menu">
+        <li href="#" class="list-group-item menu1 active">
+            Menu
+        </li>
+        <%@category_parent.each do |cat|%>
+        <li href="" class="list-group-item menu1">
+        <a href ><%=cat.name %></a>
+        </li>
+        <ul>
+        <!-- catChildren ở trong fontend_helper -->
+        <%catChildren(cat.id).each do |y| %> 
+            <li class="list-group-item">
+                <a href="<%=fontend_category_path(category:y.slug)%>"><%=y.name%></a>
+            </li>
+            <%end%>
+        </ul>
+        <%end%>
+    </ul>
+</div>
+<%end%>

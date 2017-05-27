@@ -1,85 +1,24 @@
 <%content_for :content do%>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 ">
+           <div class="col-md-3 ">
                 <ul class="list-group" id="menu">
                     <li href="#" class="list-group-item menu1 active">
                         Menu
                     </li>
-                    <li href="#" class="list-group-item menu1">
-                        Level 1
+                    <%@category_parent.each do |cat|%>
+                    <li href="" class="list-group-item menu1">
+                    <a href ><%=cat.name %></a>
                     </li>
                     <ul>
+                    <!-- catChildren ở trong fontend_helper -->
+                    <%catChildren(cat.id).each do |y| %> 
                         <li class="list-group-item">
-                            <a href="#">Level2</a>
+                            <a href="<%=fontend_category_path(category:y.slug)%>"><%=y.name%></a>
                         </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
+                        <%end%>
                     </ul>
-                    <li href="#" class="list-group-item menu1">
-                        <a href="#">Level 1</a>
-                    </li>
-                    <ul>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                    </ul>
-                    <li href="#" class="list-group-item menu1">
-                        <a href="#">Level 1</a>
-                    </li>
-                    <ul>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                    </ul>
-                    <li href="#" class="list-group-item menu1">
-                        <a href="#">Level 1</a>
-                    </li>
-                    <ul>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Level2</a>
-                        </li>
-                    </ul>
-                    <li href="#" class="list-group-item menu1">
-                        <a href="#">Level 1</a>
-                    </li>
-                    <li href="#" class="list-group-item menu1">
-                        <a href="#">Level 1</a>
-                    </li>
+                    <%end%>
                 </ul>
             </div>
             <div class="col-md-9 ">
@@ -87,8 +26,8 @@
                     <div class="panel-heading" style="background-color:#337AB7; color:white;">
                         <h4><b>Panel heading without title</b></h4>
                     </div>
-                    <%@phantrang=paginate(1,fontend_category_path(),newInCat(getCatId(params[:category])))%>
-                    <%@phantrang[:query].each do |new| %>
+                   
+                    <%@new_in_category.each do |new| %>
                      <div class="row-item row">
                         <div class="col-md-3">
 
@@ -100,45 +39,14 @@
                         <div class="col-md-9">
                             <h3><%=new.title%></h3>
                             <p><%=new.description%></p>
-                            <a class="btn btn-primary" href="<%=fontend_detail_path(:category=>"#{categorySlug(new.id)}",:slug=>"#{new.slug}")%>">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                            <a class="btn btn-primary" href="<%=fontend_detail_path(:category=>"#{categorySlug(new.category_id)}",:slug=>"#{new.slug}")%>">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
                         </div>
                         <div class="break"></div>
                     </div>
                     <%end%>
-                    <!-- Pagination -->
-                    <!-- <div class="row text-center">
-                        <div class="col-lg-12">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#">&laquo;</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">1</a>
-                                </li>
-                                <li>
-                                    <a href="#">2</a>
-                                </li>
-                                <li>
-                                    <a href="#">3</a>
-                                </li>
-                                <li>
-                                    <a href="#">4</a>
-                                </li>
-                                <li>
-                                    <a href="#">5</a>
-                                </li>
-                                <li>
-                                    <a href="#">&raquo;</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> -->
-                    <!-- /.row -->
-                    <ul class="pagination" >
-                    <%@phantrang[:link].each do |url|%>
-                    <%=url %>
-                    <%end%>
-                    </ul>
+                    <div style="text-align: center">
+                        <%=will_paginate @new_in_category%>
+                    </div>   
                 </div>
             </div> 
         </div>
