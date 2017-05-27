@@ -8,7 +8,7 @@ $(document).ready(function(){
     	$(this).hide();
     	$(".loading-gif").show();
     	var last_id = $('.record').last().attr('data-id');
-    	alert(last_id);
+    	// alert(last_id);
     	  $.ajax({
             // make a get request to the server
             type: "get",
@@ -16,7 +16,7 @@ $(document).ready(function(){
             url: "/loadnew",
             // send the last id to our rails app
             data: {
-                id:5
+                id:last_id
             },
             // the response will be a script
             dataType: "html",

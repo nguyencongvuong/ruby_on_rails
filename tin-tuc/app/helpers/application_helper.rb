@@ -75,6 +75,9 @@ module ApplicationHelper
    end
    return array={:link=>@link,:query=>@new}
     end
-  
+    def assets
+        @assets='/assets/'
+        return @assets
+    end
 
 end

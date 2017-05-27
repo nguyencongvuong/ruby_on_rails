@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     namespace 'admin' do
     get "/",to: "new#index"
-    get "/loadnew",to: "fontend#loadnew"
     scope "/news" do
   		get "/",to: "new#news",as: 'news'
   		get "/them-moi",to: "new#add",as: "themmoi"
@@ -35,10 +34,10 @@ Rails.application.routes.draw do
   
   scope '/' do
     get "/search",to:"fontend#search",as: "fontend_search"
-    get "/:category",to: "fontend#category",as: "fontend_category"
+    get "/category/:category",to: "fontend#category",as: "fontend_category"
   	get "/:category/:slug",to: "fontend#detail",as: "fontend_detail"
     post "/comment/create",to:"fontend#comment",as: "fontend_comment"
   end
-
+  get "/loadnew",to: "fontend#loadnew"
   root "fontend#index"
 end
