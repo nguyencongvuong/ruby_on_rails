@@ -14,7 +14,7 @@
 //= require turbolinks
 //= require_tree .
 //= require ckeditor/init
-//= require jquery-ui
+//= require jquery
 // $(document).ready(function(){
 //     $("div#load-more").click(function(e){
 //     	e.preventDefault();

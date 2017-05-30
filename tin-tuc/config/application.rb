@@ -24,6 +24,6 @@ module ProjectDemo
   config.assets.paths << Rails.root.join("app", "assets", "backend","font-awesome","css")
   config.assets.paths << Rails.root.join("app", "assets", "backend","font-awesome","fonts")
 	config.assets.paths << Rails.root.join("app", "assets","fonts")
-
+  # config.assets.paths << Rails.root.join("app", "assets", "javascripts","admin")
   end
 end

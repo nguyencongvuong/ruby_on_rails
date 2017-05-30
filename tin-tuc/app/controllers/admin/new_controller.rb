@@ -1,6 +1,7 @@
 class Admin::NewController < ApplicationController
 	layout "backend/_master"
 	include ApplicationHelper
+	skip_before_action :verify_authenticity_token,only:[:ajax]
 	def index
 		render "admin/index"		
 	end
@@ -35,7 +36,7 @@ class Admin::NewController < ApplicationController
 	end
 
 	def news
-		@news=New.all.paginate(:page => params[:page], :per_page => 10)
+		@news=New.order("id ASC").paginate(:page => params[:page], :per_page => 5)
 	end
 
 	def add
@@ -53,7 +54,18 @@ class Admin::NewController < ApplicationController
 	def category
 		
 	end
-
+	def ajax
+		@params=params[:news]
+		@news=New.all.order("id DESC").paginate(:page => params[:page], :per_page => @params)
+		respond_to do |format|
+			format.html{redirect_to :news}
+			format.js
+		end
+	end
+	def search
+		@params=params[:search][:key]
+		@news=New.where("title LIKE ?","%#{@params}%").paginate(:page=>params[:page],:per_page=>5)
+	end
 	private
 	def new_params
 		params.require(:news).permit(:title, :description, :category_id, :content,:noi_bat)

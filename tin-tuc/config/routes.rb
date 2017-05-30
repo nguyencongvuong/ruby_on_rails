@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
     mount Ckeditor::Engine => '/ckeditor'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+     post "/admin/news",to: "admin/new#ajax"
+     post "/admin/news/search",to: "admin/new#search"
     namespace 'admin' do
     get "/",to: "new#index"
     scope "/news" do
-  		get "/",to: "new#news",as: 'news'
+  		get "/",to: "new#news"
+
   		get "/them-moi",to: "new#add",as: "themmoi"
       post "/create",to: "new#create"
       delete "/delete/:id",to: "new#delete",as:"delete"
