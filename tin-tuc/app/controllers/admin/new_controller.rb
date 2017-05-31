@@ -1,7 +1,7 @@
 class Admin::NewController < ApplicationController
 	layout "backend/_master"
 	include ApplicationHelper
-	skip_before_action :verify_authenticity_token,only:[:ajax]
+	skip_before_action :verify_authenticity_token,only:[:ajax,:search]
 	def index
 		render "admin/index"		
 	end
@@ -63,8 +63,14 @@ class Admin::NewController < ApplicationController
 		end
 	end
 	def search
-		@params=params[:search][:key]
-		@news=New.where("title LIKE ?","%#{@params}%").paginate(:page=>params[:page],:per_page=>5)
+		
+		if params[:key]
+			@params=params[:key].downcase
+			@news=New.where("title LIKE ?","%#{@params}%").paginate(:page=>params[:page],:per_page=>5)
+		end
+		respond_to do |format|
+			format.js
+		end
 	end
 	private
 	def new_params

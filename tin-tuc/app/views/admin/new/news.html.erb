@@ -1,5 +1,4 @@
 <%content_for :title do %> 
- <%= javascript_include_tag 'admin\new', 'data-turbolinks-track': 'reload' %>
 <%end%>
  <%content_for :content do %>
  <%=button_to "Thêm Mới",admin_themmoi_path(),{class:"btn btn-primary btn-md",method:"get"}%>
@@ -8,6 +7,7 @@
  <!-- <button id="abc">abc</button> -->
  <div style="float:left">
     <%=form_for :per_page,url:{:action=>:ajax,method: "post"},remote: true do |f|%>
+    <%=f.label :news_in_page,"Post Per Page" %>
     <%=f.select(:news,[[5,5],[10,10],[15,15],[20,20]]) %>
     <%end%>
  </div>
@@ -16,7 +16,7 @@
      <%=form_for :search,url:{:action=>:search},remote:true do |f| %>
         
         <%=f.text_field :key,placeholder:"Search" %>
-        <%=f.submit class:"btn btn-default" %>
+        <%=f.submit "Tìm Kiếm",id:"search_news",class:"btn btn-default" %>
      <%end%>
   </div>
                         <div class="alert alert-success" style="margin-top: 30px">Danh Sách Bài Viết <span class="badge"><%=New.all.size%></span></div>

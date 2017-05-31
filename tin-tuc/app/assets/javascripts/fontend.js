@@ -2,7 +2,7 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery
-$(document).ready(function(){
+$(document).on("turbolinks:load",function(){
     $("div#load-more").click(function(e){
     	e.preventDefault();
     	$(this).hide();

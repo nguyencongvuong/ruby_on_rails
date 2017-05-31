@@ -1,7 +1,7 @@
 //= require rails-ujs
 //= require jquery
 //= require ckeditor/init
-$(document).ready(function(){
+$(document).on("page:load",function(){
 	$("#per_page_news").change(function(e){
 		e.preventDefault();
 		var value=$("#per_page_news option:selected").val();
@@ -13,7 +13,6 @@ $(document).ready(function(){
 				news:value
 			},
 			success:function(data){
-
 			}
 		})
 	});

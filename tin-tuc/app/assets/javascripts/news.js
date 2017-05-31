@@ -1,8 +1,32 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-//= require rails-ujs
-//= require turbolinks
-//= require_tree .
-//= require jquery
-$('.container').append('<%= escape_javascript(render(:partial => @news)) %>')
+$(document).on("turbolinks:load",function(){
+	$("#search_key").keyup(function(){
+		var value=$(this).val();
+		$.ajax({
+			url:"/admin/news/search",
+			type:"post",
+			dataType:"script",
+			data:{
+				key:value
+			},
+			success:function(){
+
+			}
+		})
+	});
+});
+$(document).on("turbolinks:load",function(){
+	$("#search_news").click(function(){
+		var value=$("#search_key").val();
+		$.ajax({
+			url:"/admin/news/search",
+			type:"post",
+			dataType:"script",
+			data:{
+				key:value
+			},
+			success:function(){
+
+			}
+		})
+	});
+});
