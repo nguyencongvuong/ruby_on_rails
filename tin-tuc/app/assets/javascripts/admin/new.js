@@ -1,7 +1,7 @@
 //= require rails-ujs
 //= require jquery
 //= require ckeditor/init
-$(document).on("page:load",function(){
+$(document).on("turbolinks:load",function(){
 	$("#per_page_news").change(function(e){
 		e.preventDefault();
 		var value=$("#per_page_news option:selected").val();
