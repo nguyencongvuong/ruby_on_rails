@@ -61,7 +61,7 @@
                                 </tbody>
                             </table>
                             <div style="text-align: center;">
-                            <%= will_paginate @news %>
+                            <%= will_paginate @news,:params=>{:controller=>"admin/new",:action=>'news'} %>
                             </div>
                         </div>
                     </div>
