@@ -7,10 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Ruby On Rails</title>
     <%= csrf_meta_tags %>
-
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title>Ruby On Rails</title>
     <!-- Bootstrap Core CSS -->
     <link href="<%=@assets%>/bootstrap.min.css" rel="stylesheet">
     <script src="<%=@assets%>/jquery.js"></script>
@@ -52,34 +51,28 @@
                         <a href="#">Liên hệ</a>
                     </li>
                 </ul>
-<!-- 
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form> -->
-
                 <ul class="nav navbar-nav pull-right">
                     <li>
-                        <a href="<%=user_register_path()%>">Đăng ký</a>
+                        <a href="<%=new_user_registration_path()%>">Đăng ký</a>
                     </li>
                     <%if !session[:user] || session[:user].empty?%>
                     <li>
-                        <a href="<%=session_login_path%>">Đăng nhập</a>
+                        <a href="<%=user_session_path%>">Đăng nhập</a>
                     </li>
                     <%end%>
-                    <%if session[:user] && !session[:user].empty?%>
+                    <%if user_signed_in?%>
+                    <%=current_user.inspect%>
                     <li>
-                        <a href="<%=user_path(session[:user]["id"])%>">
+                        <a href="">
                             <span class ="glyphicon glyphicon-user"></span>
-                            <%=session[:user]["name"]%>
+                           
                         </a>
                     </li>
                     <%end%>
-                     <%if session[:user] && !session[:user].empty?%>
+                        <%if user_signed_in?%>
                     <li>
-                        <a href="<%=logout_path%>">Đăng xuất</a>
+                        
+                        <%=link_to "Đăng xuất",destroy_user_session_path,:method=>"delete"%>
                     </li>
                     <%end%>
                 </ul>
@@ -105,3 +98,6 @@
 </body>
 
 </html>
+
+
+

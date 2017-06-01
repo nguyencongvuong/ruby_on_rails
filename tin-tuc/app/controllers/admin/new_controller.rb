@@ -1,22 +1,25 @@
 class Admin::NewController < ApplicationController
 	layout "backend/_master"
 	include ApplicationHelper
+	before_action :authenticate_user!
 	skip_before_action :verify_authenticity_token,only:[:ajax,:search]
 	def index
 		render "admin/index"		
 	end
 	def create
-		@news=New.new(new_params)
+		@new=New.new(new_params)
+		@new.user_id=current_user.id
 		# @news.
 		# title=params[:news][:title]
 		# @news.description=params[:news][:description]
 		# @news.content=params[:news][:content]
 		# @news.category_id=params[:news][:category_id]
-		if @news.save
+		if @new.save
 			redirect_to :action=>"news"
 		else
 			render "admin/new/add"
 		end
+		# render html: current_user.news.inspect
 	end
 	def edit
 		@news=New.find(params[:id])
@@ -24,10 +27,7 @@ class Admin::NewController < ApplicationController
 	end
 	def update
 		@news=New.find(params[:id])
-		# @news.title=params[:news][:title]
-		# @news.description=params[:news][:description]
-		# @news.content=params[:news][:content]
-		# @news.category_id=params[:news][:category_id]
+		@news.user_id=current_user.id
 		if @news.update(new_params)
 			redirect_to :action=>"news"
 		else

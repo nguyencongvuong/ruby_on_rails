@@ -1,5 +1,5 @@
 $(document).on("turbolinks:load",function(){
-	$("#search_key").keyup(function(){
+	$("#search_key").keydown(function(){
 		var value=$(this).val();
 		$.ajax({
 			url:"/admin/news/search",

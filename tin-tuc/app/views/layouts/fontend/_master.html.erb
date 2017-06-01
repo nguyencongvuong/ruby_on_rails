@@ -60,24 +60,26 @@
               
                 <ul class="nav navbar-nav pull-right">
                     <li>
-                        <a href="<%=user_register_path()%>">Đăng ký</a>
+                        <a href="<%=new_user_password_path()%>">Đăng ký</a>
                     </li>
-                    <%if !session[:user] || session[:user].empty?%>
+                    <%if !user_signed_in?%>
                     <li>
-                        <a href="<%=session_login_path%>">Đăng nhập</a>
+                        <a href="<%=user_session_path%>">Đăng nhập</a>
                     </li>
                     <%end%>
-                    <%if session[:user] && !session[:user].empty?%>
+                    <%if user_signed_in?%>
+                    
                     <li>
-                        <a href="<%=user_path(session[:user]["id"])%>">
+                        <a href="">
                             <span class ="glyphicon glyphicon-user"></span>
-                            <%=session[:user]["name"]%>
+                            <%=current_user.name%>
                         </a>
                     </li>
                     <%end%>
-                     <%if session[:user] && !session[:user].empty?%>
+                        <%if user_signed_in?%>
                     <li>
-                        <a href="<%=logout_path%>">Đăng xuất</a>
+                        
+                        <%=link_to "Đăng xuất",destroy_user_session_path,:method=>"delete"%>
                     </li>
                     <%end%>
                 </ul>

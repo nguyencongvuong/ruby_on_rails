@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
     mount Ckeditor::Engine => '/ckeditor'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
      post "/admin/news",to: "admin/new#ajax"
@@ -24,16 +25,16 @@ Rails.application.routes.draw do
     end
   end
 
-  scope "/user" do
-    get "/register",to: "user#register",as: "user_register"
-    post "/create",to: "user#create",as: "user_create"
-    get "/show",to: "user#show",as: "user_show"
-    get '/active/:slug',to: "user#active",as: "user_active"
-    post "/session/create",to: "session#create",as: "session_create"
-    get "/login",to: "session#login",as:"session_login"
-    get "/show/:id",to: "session#show",as: "user"
-    get "/logout",to: "session#logout",as: "logout"
-  end
+  # scope "/user" do
+  #   get "/register",to: "user#register",as: "user_register"
+  #   post "/create",to: "user#create",as: "user_create"
+  #   get "/show",to: "user#show",as: "user_show"
+  #   get '/active/:slug',to: "user#active",as: "user_active"
+  #   post "/session/create",to: "session#create",as: "session_create"
+  #   get "/login",to: "session#login",as:"session_login"
+  #   get "/show/:id",to: "session#show",as: "user"
+  #   get "/logout",to: "session#logout",as: "logout"
+  # end
   
   scope '/' do
     get "/search",to:"fontend#search",as: "fontend_search"
