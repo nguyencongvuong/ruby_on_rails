@@ -6,7 +6,8 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   # POST /resource/confirmation
   # def create
-  #   super
+  #   @users=User.new(params_user())
+  #   @users.save
   # end
 
   # GET /resource/confirmation?confirmation_token=abcdef
@@ -25,4 +26,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # def after_confirmation_path_for(resource_name, resource)
   #   super(resource_name, resource)
   # end
+  private 
+  def params_user 
+  end
 end

@@ -12,7 +12,7 @@ class New < ApplicationRecord
 	def slug_new(id="")
 		if id==""
 			if New.last.nil?
-				@id_last=0
+				@id=0
 			else
 				@id_first=New.first.id
 				@id_last=New.last.id

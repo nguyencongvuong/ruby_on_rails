@@ -24,6 +24,7 @@ module ProjectDemo
   config.assets.paths << Rails.root.join("app", "assets", "backend","font-awesome","css")
   config.assets.paths << Rails.root.join("app", "assets", "backend","font-awesome","fonts")
 	config.assets.paths << Rails.root.join("app", "assets","fonts")
-  # config.assets.paths << Rails.root.join("app", "assets", "javascripts","admin")
+  config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+  config.i18n.default_locale = :vn
   end
 end

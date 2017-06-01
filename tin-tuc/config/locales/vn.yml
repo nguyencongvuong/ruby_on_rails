@@ -28,7 +28,20 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
+vn:
+  errors:
+    messages:
+      blank: "Không thể bỏ trống"
+      not_saved: "Chưa tạo được"
+  will_paginate:
+    next_label: "Trang Sau"
+    previous_label: "Trang Trước"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "đã tồn tại"
 
-en:
-  
 

@@ -23,6 +23,10 @@ Rails.application.routes.draw do
       get "/edit/:id",to:"category#edit",as: "category_edit"
       put "/update/:id",to:"category#update",as:"category_update"
     end
+    scope "user" do
+      get "/",to: "user#index",as:"user" 
+      post "update",to:"user#update"
+    end
   end
 
   # scope "/user" do
